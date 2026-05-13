@@ -410,24 +410,31 @@ A: 在配置文件的 `exclude.keywords` 中添加排除词
 
 ## 📦 发布与分发
 
-### 发布到 SkillHub
+### 发布到 SkillHub（需要 GitHub repo）
 
 ```bash
-# 需要 GitHub repo
-hermes skills publish ~/.hermes/skills/b2b-lead-generation --to github --repo owner/repo
+# 必须指定 --to github --repo owner/repo，否则报错 "Error: --repo required"
+gh auth login   # 先登录 GitHub CLI
+hermes skills publish <path> --to github --repo owner/repo
 
-# 安全审计会标记 os.environ.get() 为 "exfiltration"（读取 API key）
-# 这是误报，使用 --force 覆盖
+# ⚠️ 安全审计误报：os.environ.get() 会被标记为 "exfiltration"（读取 API key）
+# 这是正常行为，用 --force 覆盖即可
 hermes skills publish <path> --to github --repo owner/repo --force
+
+# 也可以用 URL 直接安装（无需发布到 SkillHub）
+hermes skills install https://github.com/owner/repo/SKILL.md
 ```
+
+详见 [`references/skillhub-publishing.md`](references/skillhub-publishing.md)
 
 ### 替代分发方式（无 GitHub）
 
 ```bash
-# 打包为 tar.gz
+# 打包为 tar.gz（约 31KB）
 cd ~/.hermes/skills && tar -czvf b2b-lead-generation.tar.gz b2b-lead-generation
 
 # 用户安装：解压到技能目录 + 运行安装脚本
+mkdir -p ~/.hermes/skills
 tar -xzf b2b-lead-generation.tar.gz -C ~/.hermes/skills/
 bash ~/.hermes/skills/b2b-lead-generation/scripts/install.sh
 ```
