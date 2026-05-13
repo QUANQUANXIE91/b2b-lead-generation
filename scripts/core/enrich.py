@@ -257,6 +257,157 @@ def clean_content(text: str) -> str:
     return text.strip()
 
 
+def extract_facebook_url(content: str, url: str) -> Optional[str]:
+    """
+    从网页内容中提取 Facebook 链接
+    
+    优先级：
+    1. 官方主页链接（facebook.com/公司名）
+    2. 任何 FB 链接
+    
+    排除：
+    - 个人主页（facebook.com/people/）
+    - 帖子链接（posts/）
+    - 照片链接（photos/）
+    """
+    if not content:
+        return None
+    
+    # 常见 FB 链接模式
+    patterns = [
+        r'facebook\.com/([a-zA-Z0-9.\-]+)',
+        r'fb\.com/([a-zA-Z0-9.\-]+)',
+        r'm\.facebook\.com/([a-zA-Z0-9.\-]+)',
+    ]
+    
+    all_matches = []
+    for pattern in patterns:
+        matches = re.findall(pattern, content, re.IGNORECASE)
+        all_matches.extend(matches)
+    
+    # 过滤掉非商业页面
+    excluded_keywords = [
+        'people', 'posts', 'photos', 'videos', 'groups', 'events',
+        'marketplace', 'stories', 'reel', 'watch', 'gaming',
+        'share', 'sharer', 'plugins', 'dialog', 'login', 'signup'
+    ]
+    
+    business_urls = []
+    for username in set(all_matches):
+        username_lower = username.lower()
+        
+        # 排除个人页面和帖子
+        if any(kw in username_lower for kw in excluded_keywords):
+            continue
+        
+        # 排除纯数字ID（通常是个人）
+        if username.isdigit():
+            continue
+        
+        # 构建完整 URL
+        clean_username = username.split('?')[0]  # 移除查询参数
+        fb_url = f"https://www.facebook.com/{clean_username}"
+        business_urls.append(fb_url)
+    
+    if business_urls:
+        # 优先返回第一个（通常是最重要的）
+        return business_urls[0]
+    
+    return None
+
+
+def extract_facebook_info(fb_content: str) -> Dict:
+    """
+    从 Facebook 页面内容中提取信息
+    
+    提取内容：
+    - WhatsApp 号码（商业页面常见）
+    - 电话
+    - 邮箱
+    - 地址
+    - 公司简介
+    - 粉丝数（规模判断）
+    """
+    if not fb_content:
+        return {}
+    
+    info = {}
+    
+    # WhatsApp（FB 商业页面常见）
+    wa_patterns = [
+        r'whatsapp[:\s]*([+\d][\d\s\-]{7,20})',
+        r'wa\.me/(\d+)',
+        r'api\.whatsapp\.com/send\?phone=(\d+)',
+    ]
+    
+    for pattern in wa_patterns:
+        match = re.search(pattern, fb_content, re.IGNORECASE)
+        if match:
+            phone = re.sub(r'[^\d+]', '', match.group(1))
+            if len(phone) >= 8:
+                info['whatsapp'] = phone
+                break
+    
+    # 电话
+    phone_patterns = [
+        r'\+?\d{1,4}[\s\-\.]?\(?\d{2,4}\)?[\s\-\.]?\d{3,4}[\s\-\.]?\d{3,4}',
+        r'Tel[:\s]*([+\d][\d\s\-]{7,15})',
+        r'Phone[:\s]*([+\d][\d\s\-]{7,15})',
+        r'Call[:\s]*([+\d][\d\s\-]{7,15})',
+    ]
+    
+    phones = []
+    for pattern in phone_patterns:
+        matches = re.findall(pattern, fb_content, re.IGNORECASE)
+        for m in matches:
+            phone = re.sub(r'[^\d+]', '', m if isinstance(m, str) else m[0])
+            if len(phone) >= 8 and phone not in PHONE_INVALID_EXACT:
+                phones.append(phone)
+    
+    if phones:
+        info['phone'] = phones[0]
+    
+    # 邮箱
+    emails = extract_emails(fb_content)
+    if emails:
+        info['email'] = emails[0]
+    
+    # 地址（可能包含城市/国家信息）
+    address_patterns = [
+        r'Address[:\s]*([^\n]{10,100})',
+        r'Location[:\s]*([^\n]{5,50})',
+        r'Address\n([^\n]{10,100})',
+    ]
+    
+    for pattern in address_patterns:
+        match = re.search(pattern, fb_content, re.IGNORECASE)
+        if match:
+            address = match.group(1).strip()
+            # 清洗地址
+            address = re.sub(r'\s+', ' ', address)
+            if len(address) > 5:
+                info['address'] = address
+                break
+    
+    # 粉丝数（判断规模）
+    follower_patterns = [
+        r'(\d+[\d,]*)\s*(?:followers?|likes|people)',
+        r'(\d+[\d,]*)\s*(?:人关注|关注|赞)',
+    ]
+    
+    for pattern in follower_patterns:
+        match = re.search(pattern, fb_content, re.IGNORECASE)
+        if match:
+            followers = match.group(1).replace(',', '')
+            try:
+                info['followers'] = int(followers)
+            except:
+                pass
+            break
+    
+    return info
+
+
 # ============================================================
 # 补全工具
 # ============================================================
@@ -454,6 +605,22 @@ class ContactEnricher:
                 content
             )
         
+        # ============================================================
+        # 4. Facebook 反向查找（Phase 1 社媒渠道）
+        # ============================================================
+        social_enabled = self.config.get("social_media", {}).get("facebook", {}).get("enabled", True)
+        if social_enabled and content:
+            fb_url = extract_facebook_url(content, url)
+            if fb_url:
+                print(f"  [FB] Found page: {fb_url}")
+                record["Facebook"] = fb_url
+                
+                # 用 Jina Reader 读取 FB 页面
+                fb_info = self._enrich_from_facebook(fb_url)
+                if fb_info:
+                    # 合并 FB 信息（不覆盖已有数据）
+                    self._merge_facebook_info(record, fb_info)
+        
         # 更新完整度
         record["完整度"] = self._calc_completeness(record)
         
@@ -461,6 +628,81 @@ class ContactEnricher:
         record["Tier"] = self._calc_tier(record)
         
         return record
+    
+    def _enrich_from_facebook(self, fb_url: str) -> Optional[Dict]:
+        """通过 Jina Reader 读取 Facebook 页面提取信息"""
+        if "jina" not in self.tools:
+            return None
+        
+        try:
+            # FB 页面用更长的超时
+            jina = self.tools["jina"]
+            old_timeout = jina.timeout
+            jina.timeout = 15  # FB 页面需要更长超时
+            
+            fb_content = jina.read(fb_url)
+            jina.timeout = old_timeout  # 恢复
+            
+            if not fb_content:
+                print(f"  [FB] Failed to read page")
+                return None
+            
+            fb_content = clean_content(fb_content)
+            if not fb_content or len(fb_content) < 50:
+                print(f"  [FB] Page too short ({len(fb_content) if fb_content else 0} chars)")
+                return None
+            
+            info = extract_facebook_info(fb_content)
+            if info:
+                found = []
+                if info.get('whatsapp'):
+                    found.append(f"WA:{info['whatsapp']}")
+                if info.get('phone'):
+                    found.append(f"Tel:{info['phone']}")
+                if info.get('email'):
+                    found.append(f"Email:{info['email']}")
+                if info.get('followers'):
+                    found.append(f"{info['followers']}followers")
+                print(f"  [FB] Extracted: {', '.join(found)}")
+            
+            return info if info else None
+            
+        except Exception as e:
+            print(f"  [FB] Error: {e}")
+            return None
+    
+    def _merge_facebook_info(self, record: Dict, fb_info: Dict):
+        """合并 Facebook 提取的信息到主记录（不覆盖已有数据）"""
+        # WhatsApp（优先使用 FB 的，通常更准确）
+        if fb_info.get('whatsapp') and not record.get('WhatsApp'):
+            record['WhatsApp'] = fb_info['whatsapp']
+        
+        # 电话
+        if fb_info.get('phone') and not record.get('phone'):
+            record['phone'] = fb_info['phone']
+            phone_country = detect_phone_country(fb_info['phone'])
+            if phone_country and not record.get('国家'):
+                record['country_detected'] = phone_country
+        
+        # 邮箱
+        if fb_info.get('email') and not record.get('email'):
+            record['email'] = fb_info['email']
+        
+        # 地址 → 备注
+        if fb_info.get('address'):
+            existing_notes = record.get('备注', '')
+            if 'FB地址' not in existing_notes:
+                record['备注'] = f"{existing_notes} | FB地址: {fb_info['address']}".strip(' |')
+        
+        # 粉丝数 → 备注
+        if fb_info.get('followers'):
+            existing_notes = record.get('备注', '')
+            if 'FB粉丝' not in existing_notes:
+                record['备注'] = f"{existing_notes} | FB粉丝: {fb_info['followers']}".strip(' |')
+            
+            # 粉丝数影响 Tier
+            if fb_info['followers'] >= 1000 and record['Tier'] == 'Tier 3':
+                record['Tier'] = 'Tier 2'  # 有规模的升级
     
     def _calc_completeness(self, record: Dict) -> str:
         has_email = bool(record.get("email"))
