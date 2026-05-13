@@ -1,7 +1,7 @@
 ---
 name: b2b-lead-generation
 description: "通用 B2B 客户开发工作流 — 搜索、入库、补全、背调、反思闭环。适用于太阳能、LED、机械、纺织等各行业外贸客户开发。支持飞书/CSV/Notion 多种输出方式，多语言关键词，自动化反思进化。"
-version: "1.0.0"
+version: "1.1.0"
 tags: [b2b, lead-generation, sales, export,外贸, customer-development, automation, feishu, reflection]
 author: "Solar Lead Workflow Team"
 license: "MIT"
@@ -29,6 +29,7 @@ min_hermes_version: "0.5.0"
 | 🔍 **智能搜索** | 多引擎搜索（Serper/Brave/Tavily），支持多语言关键词 |
 | 📥 **自动入库** | 去重、分类、Tier 分层，支持飞书/CSV/Notion |
 | 📧 **联系方式补全** | Jina Reader + Hunter.io + HTTP 抓取，80%+ 成功率 |
+| 📱 **社媒渠道** | Facebook 反向查找，自动提取 WhatsApp/电话/邮箱，90%+ 补全率 |
 | 🕵️ **背调画像** | 自动提取公司类型、国家、主营业务，Maigret 数字画像 |
 | 🧠 **反思闭环** | 自动记录执行结果，分析趋势，生成优化建议 |
 | ⏰ **定时任务** | 每天 09:00 自动运行，周末可调整策略 |
@@ -378,6 +379,26 @@ output:
 | Jina Reader | 无限制 | 80% | 全球 ⭐⭐⭐⭐⭐ |
 | Hunter.io | 25 次/月 | 70% | 欧美 |
 | HTTP 抓取 | 无限制 | 50% | 全球 |
+| Facebook 反向查找 | 无限制 | 30-50% | 东南亚/中东/拉美 ⭐ |
+
+### 社媒渠道（Facebook）
+
+| 来源 | 方式 | 提取内容 | 适用市场 |
+|------|------|---------|---------|
+| **网站 → FB** | 检测网站中的 FB 链接，访问 FB 页面 | WhatsApp、电话、邮箱、地址、粉丝数 | 全球 |
+| **FB 搜索**（Phase 2） | 直接搜索 FB 商业页面 | 公司名、简介、网站、联系方式 | 全球 |
+| **FB 群组**（Phase 3） | 搜索行业买家群 | 群组成员、业务需求帖 | 全球 |
+
+**配置**（默认开启）：
+```yaml
+social_media:
+  facebook:
+    enabled: true    # 关闭设为 false
+```
+
+**工作原理**：补全流程中，Jina Reader 抓取网站内容后，自动扫描 FB 链接 → 发现 FB 商业页面 → 用 Jina Reader 读取 FB 页面 → 提取 WhatsApp/电话/邮箱 → 智能合并到主记录（不覆盖已有数据）。粉丝数 ≥ 1000 自动升级为 Tier 2。
+
+详见 [`references/facebook-integration.md`](references/facebook-integration.md)
 
 ### 输出存储
 
@@ -445,6 +466,7 @@ bash ~/.hermes/skills/b2b-lead-generation/scripts/install.sh
 
 | 版本 | 日期 | 变更内容 |
 |------|------|---------|
+| **1.1.0** | 2026-05-13 | 新增 Facebook 反向查找（Phase 1 社媒渠道），提取 WhatsApp/电话/邮箱/粉丝数 |
 | **1.0.0** | 2026-05-13 | 初始版本：从 Solar 客户开发工作流抽象为通用 B2B 版本 |
 
 **演进说明**: 本技能从 `solar-lead-workflow` v4.0.2 演化而来，详见 [`references/evolution.md`](references/evolution.md)

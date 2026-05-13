@@ -1,8 +1,8 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "skill_name": "b2b-lead-generation",
   "created_at": "2026-05-13",
-  "updated_at": "2026-05-13",
+  "updated_at": "2026-05-14",
   
   "utility_score": 0.75,
   "score_threshold": 0.5,
@@ -38,6 +38,18 @@
   
   "version_history": [
     {
+      "version": "1.1.0",
+      "date": "2026-05-14",
+      "changes": [
+        "Added Facebook reverse lookup (Phase 1): auto-detect FB links from website",
+        "Extract WhatsApp/phone/email/address/followers from FB business pages",
+        "Auto-upgrade Tier when followers >= 1000",
+        "Added social_media.facebook.enabled config option (default: true)",
+        "Added references/facebook-integration.md documentation",
+        "Fixed skill_meta.json version sync and GitHub repo URL"
+      ]
+    },
+    {
       "version": "1.0.0",
       "date": "2026-05-13",
       "changes": [
@@ -53,6 +65,6 @@
   "meta": {
     "author": "Solar Lead Workflow Team",
     "license": "MIT",
-    "repository": "https://github.com/your-repo/b2b-lead-generation"
+    "repository": "https://github.com/QUANQUANXIE91/b2b-lead-generation"
   }
 }
