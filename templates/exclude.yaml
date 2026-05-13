@@ -1,0 +1,122 @@
+# ============================================================
+# B2B Lead Generation - 排除词模板
+# ============================================================
+# 用法：选择你需要的排除词，复制到配置文件的 exclude 部分
+# ============================================================
+
+# 通用排除（适合所有行业）
+common:
+  keywords:
+    # 电商平台
+    - "Amazon"
+    - "eBay"
+    - "Alibaba"
+    - "AliExpress"
+    - "Walmart"
+    - "Target"
+    - "Costco"
+    - "Shopify"
+    - "Etsy"
+    
+    # B2B 平台（通常是中间商）
+    - "Made-in-China"
+    - "GlobalSources"
+    - "DHgate"
+    - "Thomasnet"
+    
+    # 信息/内容类
+    - "Wikipedia"
+    - "YouTube"
+    - "Reddit"
+    - "Quora"
+    - "Medium"
+    - "LinkedIn"  # 非公司网站
+    - "Facebook"
+    - "Instagram"
+    - "TikTok"
+    - "Twitter"
+    
+    # 招聘/求职
+    - "Indeed"
+    - "Glassdoor"
+    - "Monster"
+    - "ZipRecruiter"
+    
+    # 政府机构
+    - ".gov"
+    - "government"
+    
+    # 教育
+    - ".edu"
+    - "university"
+    - "college"
+    - "school"
+    
+    # 个人博客
+    - "blogspot"
+    - "wordpress.com"
+    - "blogger"
+    
+    # Dropshipping（明确排除）
+    - "dropshipping"
+    - "drop ship"
+    
+  categories:
+    # 医疗类（根据需要启用）
+    # - "medical"
+    # - "hospital"
+    # - "clinic"
+    # - "vaccine"
+    # - "pharmaceutical"
+    
+    # 军事/国防（根据需要启用）
+    # - "military"
+    # - "defense"
+    # - "weapon"
+
+# --------------------------------------------------
+# 太阳能/制冷 专用排除
+# --------------------------------------------------
+solar:
+  keywords:
+    - "solar panel installation guide"
+    - "solar calculator"
+    - "solar review"
+    - "solar forum"
+  categories:
+    - "medical"      # 不做医疗太阳能
+    - "hospital"     # 不做医院项目
+    - "vaccine"      # 不做疫苗冷链
+    - "clinic"
+
+# --------------------------------------------------
+# LED 照明 专用排除
+# --------------------------------------------------
+led:
+  keywords:
+    - "LED strip Arduino"
+    - "LED project tutorial"
+    - "LED art"
+    - "LED cosplay"
+  categories: []
+
+# --------------------------------------------------
+# 纺织服装 专用排除
+# --------------------------------------------------
+textile:
+  keywords:
+    - "fast fashion"
+    - "second hand"
+    - "thrift"
+    - "vintage clothing"
+  categories: []
+
+# --------------------------------------------------
+# 机械制造 专用排除
+# --------------------------------------------------
+machinery:
+  keywords:
+    - "machinery auction"
+    - "used machinery"
+    - "machinery rental"
+  categories: []

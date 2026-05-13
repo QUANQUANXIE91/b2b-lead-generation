@@ -1,0 +1,130 @@
+# ============================================================
+# B2B Lead Generation 配置模板
+# 复制此文件为 my-product.yaml 并根据你的产品修改
+# ============================================================
+
+# 产品信息
+product:
+  name: "Your Product"                    # 你的产品名（英文）
+  category: ""                             # 产品类别（可选）
+  
+  # 多语言关键词（每个关键词会组合国家名搜索）
+  keywords:
+    en: []                                  # 英文关键词
+    es: []                                  # 西班牙语
+    pt: []                                  # 葡萄牙语
+    fr: []                                  # 法语
+    ar: []                                  # 阿拉伯语
+    de: []                                  # 德语
+    id: []                                  # 印尼语
+    tl: []                                  # 菲律宾语
+    sw: []                                  # 斯瓦希里语
+    zh: []                                  # 中文
+  
+  # 高价值客户指示词（包含这些词的网站优先）
+  high_value_indicators:
+    - "wholesale"
+    - "distributor"
+    - "importer"
+    - "manufacturer"
+    - "supplier"
+    - "trading"
+    - "exporter"
+    - "OEM"
+    - "ODM"
+
+# 目标市场
+markets:
+  # 示例：添加你自己的市场
+  - name: "Your Market"
+    countries: ["Country1", "Country2"]    # 目标国家（英文名）
+    languages: ["en"]                       # 市场语言
+    weight: 100                             # 权重（百分比）
+
+# 排除规则
+exclude:
+  # 排除关键词（公司名或网站包含这些词的不入库）
+  keywords:
+    - "Amazon"
+    - "eBay"
+    - "Alibaba"
+    - "AliExpress"
+    - "Walmart"
+    - "dropshipping"
+  
+  # 排除类目（网站内容包含这些词的不入库）
+  categories: []
+
+# 输出配置
+output:
+  type: "csv"                              # 可选: csv / feishu / notion
+  
+  # CSV 输出（默认）
+  csv:
+    path: "./leads.csv"                    # 输出文件路径
+    append: true                            # 追加模式（不覆盖已有数据）
+  
+  # 飞书输出（可选）
+  # feishu:
+  #   app_id: "your-app-id"               # 飞书应用 ID
+  #   app_secret: "your-app-secret"       # 飞书应用 Secret
+  #   app_token: "your-app-token"         # 多维表格 app_token
+  #   table_id: "your-table-id"           # 多维表格 table_id
+
+  # Notion 输出（可选）
+  # notion:
+  #   database_id: "your-database-id"
+  #   api_key: "your-api-key"
+
+# 搜索配置
+search:
+  engines:
+    # Serper（推荐，2500次免费/月）
+    - name: "serper"
+      priority: 1                           # 优先级 1=最高
+    # Brave API
+    - name: "brave"
+      priority: 2
+    # Tavily
+    - name: "tavily"
+      priority: 3
+  
+  daily_keywords: 10                        # 每天搜索多少组关键词
+  results_per_keyword: 15                   # 每组关键词返回多少条结果
+  concurrent: 3                             # 并发搜索数（1-5）
+
+# 补全联系方式配置
+enrichment:
+  # 补全工具（按优先级尝试）
+  tools:
+    - name: "jina"                          # Jina Reader（推荐，免费）
+      priority: 1
+      timeout: 10                           # 超时秒数
+      retry: 2                              # 重试次数
+    - name: "hunter"                        # Hunter.io
+      priority: 2
+    - name: "http"                          # HTTP 直接抓取
+      priority: 3
+  
+  daily_limit: 100                          # 每天最多补全多少条
+
+# 背调配置
+background_check:
+  enabled: false                            # 是否自动背调
+  tools:
+    - name: "auto_check"                    # 自动背调
+      enabled: true
+    - name: "maigret"                       # 数字画像（需安装）
+      enabled: false
+
+# 反思闭环
+reflection:
+  enabled: true                             # 是否启用反思
+  score_threshold: 0.5                      # 评分低于此值触发优化
+  trend_window: 7                           # 趋势分析窗口（天）
+
+# 定时任务
+schedule:
+  enabled: false                            # 是否启用定时任务
+  cron: "0 9 * * *"                         # Cron 表达式
+  market_rotation: true                     # 按市场权重轮换

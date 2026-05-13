@@ -1,0 +1,181 @@
+# ============================================================
+# B2B Lead Generation - 市场区域模板
+# ============================================================
+# 用法：选择目标市场，复制到配置文件的 markets 部分
+# ============================================================
+
+# --------------------------------------------------
+# 东南亚 (Southeast Asia)
+# --------------------------------------------------
+southeast_asia:
+  - name: "Southeast Asia"
+    countries:
+      - "Thailand"
+      - "Vietnam"
+      - "Indonesia"
+      - "Philippines"
+      - "Malaysia"
+      - "Cambodia"
+      - "Myanmar"
+      - "Laos"
+      - "Singapore"
+      - "Brunei"
+    languages: ["en", "th", "vi", "id", "tl", "ms", "km"]
+    weight: 30
+
+# --------------------------------------------------
+# 中东 (Middle East)
+# --------------------------------------------------
+middle_east:
+  - name: "Middle East"
+    countries:
+      - "UAE"
+      - "Saudi Arabia"
+      - "Qatar"
+      - "Kuwait"
+      - "Bahrain"
+      - "Oman"
+      - "Jordan"
+      - "Iraq"
+      - "Lebanon"
+    languages: ["en", "ar"]
+    weight: 25
+
+# --------------------------------------------------
+# 拉丁美洲 (Latin America)
+# --------------------------------------------------
+latin_america:
+  - name: "Latin America"
+    countries:
+      - "Brazil"
+      - "Mexico"
+      - "Argentina"
+      - "Colombia"
+      - "Chile"
+      - "Peru"
+      - "Ecuador"
+      - "Venezuela"
+      - "Uruguay"
+      - "Paraguay"
+      - "Bolivia"
+      - "Costa Rica"
+      - "Panama"
+      - "Guatemala"
+      - "Dominican Republic"
+    languages: ["es", "pt"]
+    weight: 20
+
+# --------------------------------------------------
+# 非洲 (Africa)
+# --------------------------------------------------
+africa:
+  - name: "Africa"
+    countries:
+      - "Nigeria"
+      - "Kenya"
+      - "South Africa"
+      - "Ghana"
+      - "Tanzania"
+      - "Ethiopia"
+      - "Egypt"
+      - "Morocco"
+      - "Algeria"
+      - "Tunisia"
+      - "Cameroon"
+      - "Uganda"
+      - "Mozambique"
+      - "Senegal"
+    languages: ["en", "fr", "ar", "pt", "sw"]
+    weight: 15
+
+# --------------------------------------------------
+# 南亚 (South Asia)
+# --------------------------------------------------
+south_asia:
+  - name: "South Asia"
+    countries:
+      - "India"
+      - "Pakistan"
+      - "Bangladesh"
+      - "Sri Lanka"
+      - "Nepal"
+    languages: ["en"]
+    weight: 15
+
+# --------------------------------------------------
+# 欧洲 (Europe)
+# --------------------------------------------------
+europe:
+  - name: "Europe"
+    countries:
+      - "Germany"
+      - "France"
+      - "United Kingdom"
+      - "Spain"
+      - "Italy"
+      - "Netherlands"
+      - "Poland"
+      - "Belgium"
+      - "Sweden"
+      - "Norway"
+      - "Denmark"
+      - "Finland"
+      - "Switzerland"
+      - "Austria"
+      - "Portugal"
+      - "Greece"
+      - "Czech Republic"
+      - "Romania"
+    languages: ["en", "de", "fr", "es", "it", "nl", "pl", "pt"]
+    weight: 30
+
+# --------------------------------------------------
+# 北美 (North America)
+# --------------------------------------------------
+north_america:
+  - name: "North America"
+    countries:
+      - "United States"
+      - "Canada"
+      - "Mexico"
+    languages: ["en", "es"]
+    weight: 25
+
+# --------------------------------------------------
+# 大洋洲 (Oceania)
+# --------------------------------------------------
+oceania:
+  - name: "Oceania"
+    countries:
+      - "Australia"
+      - "New Zealand"
+      - "Fiji"
+      - "Papua New Guinea"
+    languages: ["en"]
+    weight: 10
+
+# --------------------------------------------------
+# 中亚 (Central Asia)
+# --------------------------------------------------
+central_asia:
+  - name: "Central Asia"
+    countries:
+      - "Kazakhstan"
+      - "Uzbekistan"
+      - "Turkmenistan"
+      - "Kyrgyzstan"
+      - "Tajikistan"
+    languages: ["en", "ru"]
+    weight: 10
+
+# --------------------------------------------------
+# 东亚 (East Asia)
+# --------------------------------------------------
+east_asia:
+  - name: "East Asia"
+    countries:
+      - "Japan"
+      - "South Korea"
+      - "Taiwan"
+    languages: ["en"]
+    weight: 20

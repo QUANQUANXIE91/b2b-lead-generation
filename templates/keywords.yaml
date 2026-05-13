@@ -1,0 +1,268 @@
+# ============================================================
+# B2B Lead Generation - 行业关键词模板
+# ============================================================
+# 用法：选择你需要的行业关键词，复制到配置文件的 product.keywords 部分
+# ============================================================
+
+# --------------------------------------------------
+# 太阳能 / 制冷
+# --------------------------------------------------
+solar:
+  en:
+    - "solar panel distributor"
+    - "solar inverter wholesale"
+    - "solar battery supplier"
+    - "solar water heater dealer"
+    - "solar energy company"
+    - "solar installer"
+    - "photovoltaic distributor"
+    - "solar pump dealer"
+    - "solar street light supplier"
+    - "solar refrigerator distributor"
+    - "cold room equipment supplier"
+    - "refrigeration compressor dealer"
+    - "freezer wholesaler"
+    - "solar cold chain"
+    - "solar cooling system"
+  es:
+    - "distribuidor panel solar"
+    - "mayorista inversor solar"
+    - "proveedor batería solar"
+    - "distribuidor refrigeración"
+    - "equipo cuarto frío"
+    - "sistema enfriamiento solar"
+  pt:
+    - "distribuidor painel solar"
+    - "atacado inversor solar"
+    - "fornecedor bateria solar"
+    - "distribuidor refrigeração"
+    - "equipamento câmara fria"
+  ar:
+    - "موزع ألواح شمسية"
+    - "تاجر جملة طاقة شمسية"
+  fr:
+    - "distributeur panneau solaire"
+    - "grossiste énergie solaire"
+
+# --------------------------------------------------
+# LED 照明
+# --------------------------------------------------
+led:
+  en:
+    - "LED bulb distributor"
+    - "LED strip wholesale"
+    - "LED panel supplier"
+    - "LED downlight dealer"
+    - "LED street light manufacturer"
+    - "LED driver supplier"
+    - "LED chip wholesaler"
+    - "commercial lighting distributor"
+    - "industrial LED lighting"
+    - "LED grow light supplier"
+    - "smart lighting distributor"
+    - "LED tube light wholesale"
+  es:
+    - "distribuidor bombilla LED"
+    - "mayorista tira LED"
+    - "proveedor iluminación LED"
+    - "distribuidor alumbrado público LED"
+    - "iluminación comercial LED"
+  pt:
+    - "distribuidor lâmpada LED"
+    - "atacado fita LED"
+    - "fornecedor iluminação LED"
+    - "iluminação pública LED"
+  de:
+    - "LED Lampen Großhändler"
+    - "LED Beleuchtung Distributor"
+  ar:
+    - "موزع إضاءة LED"
+    - "تاجر جملة مصابيح LED"
+
+# --------------------------------------------------
+# 纺织服装
+# --------------------------------------------------
+textile:
+  en:
+    - "textile distributor"
+    - "fabric wholesaler"
+    - "garment manufacturer"
+    - "clothing importer"
+    - "textile agent"
+    - "apparel supplier"
+    - "yarn distributor"
+    - "textile trading company"
+    - "fashion wholesale distributor"
+    - "uniform manufacturer"
+    - "sportswear supplier"
+    - "home textile wholesaler"
+  es:
+    - "distribuidor textil"
+    - "mayorista tela"
+    - "fabricante ropa"
+    - "importador textil"
+  pt:
+    - "distribuidor têxtil"
+    - "atacado tecido"
+    - "fabricante roupa"
+    - "importador têxtil"
+  ar:
+    - "موزع منسوجات"
+    - "تاجر جملة أقمشة"
+
+# --------------------------------------------------
+# 机械制造
+# --------------------------------------------------
+machinery:
+  en:
+    - "machinery distributor"
+    - "industrial equipment supplier"
+    - "machine tool dealer"
+    - "construction machinery importer"
+    - "agricultural equipment distributor"
+    - "CNC machine supplier"
+    - "packaging machinery dealer"
+    - "printing machine distributor"
+    - "food processing equipment"
+    - "mining equipment supplier"
+    - "plastic machinery dealer"
+    - "welding equipment distributor"
+  es:
+    - "distribuidor maquinaria"
+    - "proveedor equipo industrial"
+    - "distribuidor equipo construcción"
+  pt:
+    - "distribuidor máquinas"
+    - "fornecedor equipamento industrial"
+    - "distribuidor equipamento construção"
+  de:
+    - "Maschinen Großhändler"
+    - "Industrieausrüstung Distributor"
+  ar:
+    - "موزع آلات"
+    - "مورد معدات صناعية"
+
+# --------------------------------------------------
+# 电子电器
+# --------------------------------------------------
+electronics:
+  en:
+    - "electronics distributor"
+    - "consumer electronics wholesaler"
+    - "electrical equipment supplier"
+    - "cable and wire distributor"
+    - "electronic component supplier"
+    - "PCB manufacturer"
+    - "power supply distributor"
+    - "transformer supplier"
+    - "electrical switch dealer"
+    - "home appliance distributor"
+    - "battery supplier"
+    - "sensor distributor"
+  es:
+    - "distribuidor electrónica"
+    - "mayorista electrodomésticos"
+    - "proveedor equipos eléctricos"
+  pt:
+    - "distribuidor eletrônicos"
+    - "atacado eletrodomésticos"
+    - "fornecedor equipamentos elétricos"
+
+# --------------------------------------------------
+# 化工原料
+# --------------------------------------------------
+chemical:
+  en:
+    - "chemical distributor"
+    - "industrial chemical supplier"
+    - "paint and coating distributor"
+    - "adhesive supplier"
+    - "plastic raw material dealer"
+    - "fertilizer distributor"
+    - "pesticide supplier"
+    - "cleaning chemical wholesaler"
+    - "pharmaceutical ingredient supplier"
+    - "rubber chemical dealer"
+  es:
+    - "distribuidor productos químicos"
+    - "proveedor química industrial"
+    - "mayorista pinturas"
+  pt:
+    - "distribuidor produtos químicos"
+    - "fornecedor química industrial"
+    - "atacado tintas"
+
+# --------------------------------------------------
+# 汽车配件
+# --------------------------------------------------
+auto_parts:
+  en:
+    - "auto parts distributor"
+    - "car battery supplier"
+    - "tire wholesaler"
+    - "automotive filter dealer"
+    - "car accessories distributor"
+    - "engine parts supplier"
+    - "brake pad distributor"
+    - "suspension parts supplier"
+    - "automotive lighting distributor"
+    - "motorcycle parts dealer"
+  es:
+    - "distribuidor repuestos automotrices"
+    - "mayorista baterías auto"
+    - "proveedor llantas"
+  pt:
+    - "distribuidor peças automotivas"
+    - "atacado baterias automotivas"
+    - "fornecedor pneus"
+  ar:
+    - "موزع قطع غيار سيارات"
+    - "تاجر جملة بطاريات"
+
+# --------------------------------------------------
+# 五金工具
+# --------------------------------------------------
+hardware:
+  en:
+    - "hardware distributor"
+    - "hand tools wholesaler"
+    - "power tools supplier"
+    - "fastener distributor"
+    - "bearing supplier"
+    - "valve distributor"
+    - "pump supplier"
+    - "safety equipment dealer"
+    - "welding supplier"
+    - "abrasive distributor"
+  es:
+    - "distribuidor ferretería"
+    - "mayorista herramientas"
+    - "proveedor herramientas eléctricas"
+  pt:
+    - "distribuidor ferragens"
+    - "atacado ferramentas"
+    - "fornecedor ferramentas elétricas"
+
+# --------------------------------------------------
+# 建材
+# --------------------------------------------------
+building_materials:
+  en:
+    - "building materials distributor"
+    - "cement supplier"
+    - "steel distributor"
+    - "ceramic tile wholesaler"
+    - "glass supplier"
+    - "aluminum profile distributor"
+    - "plywood supplier"
+    - "roofing material dealer"
+    - "scaffolding supplier"
+    - "insulation material distributor"
+  es:
+    - "distribuidor materiales construcción"
+    - "proveedor cemento"
+    - "mayorista azulejos"
+  pt:
+    - "distribuidor materiais construção"
+    - "fornecedor cimento"
+    - "atacado azulejos"
