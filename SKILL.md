@@ -1,7 +1,7 @@
 ---
 name: b2b-lead-generation
 description: "通用 B2B 客户开发工作流 — 搜索、入库、补全、背调、反思闭环。适用于太阳能、LED、机械、纺织等各行业外贸客户开发。集成 Browserbase 反爬浏览器、飞书 CLI、62+技能包。支持飞书/CSV/Notion 多种输出方式，多语言关键词，自动化反思进化。"
-version: "1.3.0"
+version: "1.2.0"
 tags: [b2b, lead-generation, sales, export,外贸, customer-development, automation, feishu, browserbase, reflection]
 author: "Solar Lead Workflow Team"
 license: "MIT"
@@ -19,71 +19,6 @@ min_hermes_version: "0.5.0"
 ## 一句话介绍
 
 **输入你的产品关键词 → 自动搜索全球潜在客户 → 补全联系方式 → 生成背调报告 → 每日反思优化**
-
----
-
-## 🔧 工具集成详情（v1.2.0）
-
-### Browserbase 反爬浏览器（13 个技能）
-
-| 技能 | 功能 | 使用场景 |
-|------|------|---------|
-| `browser` | 远程浏览器自动化 | 绕过 Cloudflare/DataDome |
-| `browser/search` | 搜索引擎抓取 | bb search "solar distributor Mexico" |
-| `browser/fetch` | 页面内容提取 | bb fetch <URL> --extract |
-| `company-research` | 公司深度调研 | Plan→Research→Synthesize + ICP评分 |
-| `event-prospecting` | 展会演讲者提取 | 输入会议URL → 提取演讲者 → ICP筛选 |
-| `browser-trace` | 浏览器追踪分析 | 调试自动化流程 |
-| `cookie-sync` | Cookie 同步 | Chrome → Browserbase 持久化会话 |
-| `safe-browser` | 安全浏览器 | 受限环境下的浏览器访问 |
-| `autobrowse` | 自动浏览 | 自改进型浏览器自动化 |
-| `browser-to-api` | 流量转 API | 网站流量逆向工程 |
-| `ui-test` | UI 测试 | 前端自动化测试 |
-| `functions` | 云函数 | 部署浏览器自动化脚本 |
-| `browserbase-cli` | CLI 工具 | bb 命令行管理 |
-
-**核心命令**：
-```bash
-# 搜索（替代 Serper）
-bb search "solar panel distributor Mexico" --limit 20
-
-# 页面提取（替代 Jina Reader）
-bb fetch <URL> --extract  # 使用 extract_page.mjs
-
-# 公司研究
-bb company <domain> --icp-score
-```
-
-**搜索工具优先级**：
-```
-1. bb search (Browserbase)  ⭐ 首选
-2. Serper (Google API)
-3. Tavily
-4. Brave Search
-```
-
-### 飞书 CLI 集成（25 个技能）
-
-| 类别 | 技能 |
-|------|------|
-| **多维表格** | `lark-base`, `feishu-bitable` |
-| **即时通讯** | `lark-im`, `lark-bot`, `lark-custom-bot` |
-| **邮箱** | `lark-mail` |
-| **日历** | `lark-calendar` |
-| **云空间** | `lark-drive` |
-| **文档** | `lark-doc`, `lark-markdown`, `feishu-docs`, `feishu-doc-manager` |
-| **知识库** | `lark-wiki`, `larksuite-wiki` |
-| **幻灯片** | `lark-slides` |
-| **任务** | `lark-task` |
-| **视频会议** | `lark-vc`, `lark-vc-agent` |
-| **审批** | `lark-approval` |
-| **考勤** | `lark-attendance` |
-| **通讯录** | `lark-contact` |
-| **事件订阅** | `lark-event` |
-| **妙记** | `lark-minutes` |
-| **OKR** | `lark-okr` |
-| **画板** | `lark-whiteboard` |
-| **集成** | `lark-integration`, `lark-mcp`, `lark-toolkit` |
 
 ---
 
