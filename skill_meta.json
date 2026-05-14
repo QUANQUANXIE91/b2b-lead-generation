@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "skill_name": "b2b-lead-generation",
   "created_at": "2026-05-13",
   "updated_at": "2026-05-14",
@@ -37,6 +37,21 @@
   "evolution_suggestions": [],
   
   "version_history": [
+    {
+      "version": "1.2.0",
+      "date": "2026-05-14",
+      "changes": [
+        "Browserbase full integration: 13 skills (browser/search/fetch/company-research/event-prospecting/browser-trace/cookie-sync/safe-browser/autobrowse/browser-to-api/ui-test/functions/browserbase-cli)",
+        "Feishu CLI expansion: 25 lark-* skills (base/im/mail/calendar/drive/wiki etc.)",
+        "Search upgrade: bb search as primary engine (replaces Serper)",
+        "Page extraction upgrade: extract_page.mjs as primary (replaces Jina Reader)",
+        "Remote browser: anti-bot stealth + CAPTCHA auto-solving + residential proxies",
+        "Company research: Plan→Research→Synthesize pattern with ICP scoring",
+        "Event prospecting: conference URL → speaker extraction → ICP filtering",
+        "Total skills: 24+ → 62+",
+        "Tested: Latin America day - 72 new leads imported, 12 contacts enriched across 8 countries"
+      ]
+    },
     {
       "version": "1.1.0",
       "date": "2026-05-14",

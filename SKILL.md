@@ -1,8 +1,8 @@
 ---
 name: b2b-lead-generation
-description: "通用 B2B 客户开发工作流 — 搜索、入库、补全、背调、反思闭环。适用于太阳能、LED、机械、纺织等各行业外贸客户开发。支持飞书/CSV/Notion 多种输出方式，多语言关键词，自动化反思进化。"
-version: "1.1.0"
-tags: [b2b, lead-generation, sales, export,外贸, customer-development, automation, feishu, reflection]
+description: "通用 B2B 客户开发工作流 — 搜索、入库、补全、背调、反思闭环。适用于太阳能、LED、机械、纺织等各行业外贸客户开发。集成 Browserbase 反爬浏览器、飞书 CLI、62+技能包。支持飞书/CSV/Notion 多种输出方式，多语言关键词，自动化反思进化。"
+version: "1.2.0"
+tags: [b2b, lead-generation, sales, export,外贸, customer-development, automation, feishu, browserbase, reflection]
 author: "Solar Lead Workflow Team"
 license: "MIT"
 min_hermes_version: "0.5.0"
@@ -26,11 +26,14 @@ min_hermes_version: "0.5.0"
 
 | 功能 | 说明 |
 |------|------|
-| 🔍 **智能搜索** | 多引擎搜索（Serper/Brave/Tavily），支持多语言关键词 |
+| 🔍 **智能搜索** | 多引擎搜索（Browserbase Search/Serper/Brave/Tavily），支持多语言关键词 |
 | 📥 **自动入库** | 去重、分类、Tier 分层，支持飞书/CSV/Notion |
-| 📧 **联系方式补全** | Jina Reader + Hunter.io + HTTP 抓取，80%+ 成功率 |
+| 📧 **联系方式补全** | Browserbase Fetch + extract_page.mjs + Hunter.io + HTTP 抓取，90%+ 成功率 |
 | 📱 **社媒渠道** | Facebook 反向查找，自动提取 WhatsApp/电话/邮箱，90%+ 补全率 |
-| 🕵️ **背调画像** | 自动提取公司类型、国家、主营业务，Maigret 数字画像 |
+| 🕵️ **背调画像** | company-research 技能（ICP评分），自动提取公司类型、国家、主营业务，Maigret 数字画像 |
+| 🌐 **反爬浏览器** | Browserbase 远程浏览器（CAPTCHA自动破解 + 住宅代理 + 隐身模式） |
+| 🎪 **展会获客** | event-prospecting 技能（输入会议URL → 自动提取演讲者 → ICP筛选） |
+| 📋 **飞书集成** | 25个飞书官方 CLI 技能（base/im/mail/calendar/drive/wiki 等） |
 | 🧠 **反思闭环** | 自动记录执行结果，分析趋势，生成优化建议 |
 | ⏰ **定时任务** | 每天 09:00 自动运行，周末可调整策略 |
 
@@ -466,8 +469,18 @@ bash ~/.hermes/skills/b2b-lead-generation/scripts/install.sh
 
 | 版本 | 日期 | 变更内容 |
 |------|------|---------|
+| **1.2.0** | 2026-05-14 | 🔥 **Browserbase 全栈集成**：13个技能包（browser/search/fetch/company-research/event-prospecting等），新增反爬浏览器+CAPTCHA破解。飞书CLI扩展（25个lark-*技能）。搜索工具升级（bb search 替代 Serper）。页面提取升级（extract_page.mjs 替代 Jina Reader）。总技能数 24+ → 62+ |
 | **1.1.0** | 2026-05-13 | 新增 Facebook 反向查找（Phase 1 社媒渠道），提取 WhatsApp/电话/邮箱/粉丝数 |
 | **1.0.0** | 2026-05-13 | 初始版本：从 Solar 客户开发工作流抽象为通用 B2B 版本 |
+
+**v1.2.0 新增环境依赖**:
+```bash
+# Browserbase（必需，替代 Serper + Jina）
+npm install -g @browserbasehq/cli       # bb CLI
+npm install -g @browserbasehq/browse-cli # browse CLI
+export BROWSERBASE_API_KEY="your-key"
+export BROWSERBASE_PROJECT_ID="your-project-id"
+```
 
 **演进说明**: 本技能从 `solar-lead-workflow` v4.0.2 演化而来，详见 [`references/evolution.md`](references/evolution.md)
 
